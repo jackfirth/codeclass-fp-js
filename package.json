@@ -4,7 +4,8 @@
   "description": "Exercises for Functional Programming in Javascript codeclass",
   "main": "index.js",
   "scripts": {
-    "ex1": "./node_modules/.bin/jasmine-node --autoTest exercises/ex1"
+    "ex1": "./node_modules/.bin/jasmine-node --autoTest exercises/ex1",
+    "ex2": "./node_modules/.bin/jasmine-node --autoTest exercises/ex2"
   },
   "repository": {
     "type": "git",
