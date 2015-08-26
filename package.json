@@ -6,7 +6,8 @@
   "scripts": {
     "ex1": "./node_modules/.bin/jasmine-node --autoTest exercises/ex1",
     "ex2": "./node_modules/.bin/jasmine-node --autoTest exercises/ex2",
-    "ex3": "./node_modules/.bin/jasmine-node --autoTest exercises/ex3"
+    "ex3": "./node_modules/.bin/jasmine-node --autoTest exercises/ex3",
+    "ex4": "./node_modules/.bin/jasmine-node --autoTest exercises/ex4"
   },
   "repository": {
     "type": "git",
