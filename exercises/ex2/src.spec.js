@@ -1,7 +1,6 @@
 var getUsersWithEvenAge = require('./src'),
     catalog = require('../catalog'),
-    registerMatchers = require('../../test-utils/register-matchers'),
-    R = require('ramda');
+    registerMatchers = require('../../test-utils/register-matchers');
 
 
 describe('getUsersWithEvenAge', function() {

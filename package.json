@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "ex1": "./node_modules/.bin/jasmine-node --autoTest exercises/ex1",
-    "ex2": "./node_modules/.bin/jasmine-node --autoTest exercises/ex2"
+    "ex2": "./node_modules/.bin/jasmine-node --autoTest exercises/ex2",
+    "ex3": "./node_modules/.bin/jasmine-node --autoTest exercises/ex3"
   },
   "repository": {
     "type": "git",
