@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=1024" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <title>Ramda Crash Course</title>
+      <meta name="description" content="Ramda is a Javascript library for (mostly) pure functional programming with currying and composition" />
+      <meta name="author" content="Jack Firth" />
+      <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+      <link href="css/impress-demo.css" rel="stylesheet" />
+      <link rel="shortcut icon" href="favicon.png" />
+      <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+      <link href='http://fonts.googleapis.com/css?family=Oxygen+Mono' rel='stylesheet' type='text/css'>
+  </head>
+  <body class="impress-not-supported">
+    <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+        <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+    </div>
+    <article id="impress">
+      <section id="main" class="step" data-x="0" data-y="0">
+        <header>
+          <h1>Functional Programming in Javascript</h1>
+          <h2>with Ramda.js</h2>
+        </header>
+        <pre class="prettyprint">
+          <code class="language-javascript">
+        var R = require('ramda');</code>
+        </pre>
+      </section>
+      <section id="values" class="step" data-x="0" data-y="1000">
+        <header>
+          <h1>Functions are Values</h1>
+        </header>
+        <p>A language where functions are values has <em>first class functions</em></p>
+        <p>Functions can be stored in variables and passed as arguments like any other value</p>
+        <pre class="prettyprint">
+          <code class="language-javascript">
+      var add = function(x, y) {
+        return x + y;
+      };</code>
+        </pre>
+      </section>
+      <section id="pure" class="step" data-x="0" data-y="2000">
+        <header>
+          <h1>Pure Functions</h1>
+          <h3><em>the best kind</em></h3>
+        </header>
+        <p>A pure function has only inputs and output</p>
+        <p>A pure function mutates no state</p>
+      </section>
+      <section id="pure-code1" class="step" data-x="-500" data-y="2500" data-z="-500">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+    var someArray = [1, 2, 3];
+    someArray.push(4);</code>
+        </pre>
+        <p>
+          This mutates <code class="language-javascript inline-snippet">someArray</code>.
+        </p>
+      </section>
+      <section id="pure-code2" class="step" data-x="500" data-y="2500" data-z="-500">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+  var purePush = function(item, array) {
+    var newArray = array.slice();
+    newArray.push(item);
+    return newArray;
+  };
+
+  purePush(4, someArray);</code>
+        </pre>
+        <p>
+          This returns a <em>new</em> array and leaves
+          <code class="language-javascript inline-snippet">someArray</code> alone.
+        </p>
+      </section>
+      <section id="higher-order" class="step" data-x="0" data-y="3300">
+        <header>
+          <h1>Higher Order Functions</h1>
+        </header>
+        <p>A higher order function takes a function as an argument</p>
+        <pre class="prettyprint">
+          <code class="language-javascript">
+        > R.inc(1);
+        2
+
+        > R.map(R.inc, [1, 2, 3]);
+        [2, 3, 4]</code>
+        </pre>
+      </section>
+      <section id="currying" class="step" data-x="0" data-y="4000">
+        <header>
+          <h1>Currying</h1>
+          <h4><em>not the food</em></h4>
+        </header>
+        <p>When not given enough arguments:</p>
+        <ul>
+          <li>A normal Javascript function substitutes undefined for the rest</li>
+          <li>A curried function returns a <em>partially applied function</em> that accepts the rest</li>
+        </ul>
+      </section>
+      <section id="currying-code" class="step" data-x="0" data-y="4500" data-z="-500">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+        > var incEach = R.map(R.inc);
+
+        > incEach([1, 2, 3]);
+        [2, 3, 4]</code>
+        </pre>
+      </section>
+      <section id="order" class="step" data-x="0" data-y="5100">
+        <header>
+          <h1>Argument Order</h1>
+        </header>
+        <p>Initial arguments to a function are like configuration</p>
+        <p>The last argument is usually the data to operate on</p>
+        <p>This makes it easy to create specialized functions with currying</p>
+      </section>
+      <section id="order-example1" class="step" data-x="-1200" data-y="5000" data-z="-500">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+  var getNamed = R.filter(R.has("name"));
+
+  > getNamed([
+    {id: 0, name: "foo"},
+    {id: 1},
+    {id: 2, name: "bar"}
+  ]);
+  [{id: 0, name: "foo"},
+   {id: 2, name: "bar"}]</code>
+        </pre>
+      </section>
+      <section id="order-example2" class="step" data-x="-600" data-y="5700" data-z="-500">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+  var firstNamed = R.find(R.has("name"));
+
+  > firstNamed([
+    {id: 0, name: "foo"},
+    {id: 1},
+    {id: 2, name: "bar"}
+  ]);
+  {id: 0, name: "foo"}</code>
+        </pre>
+      </section>
+      <section id="order-example3" class="step" data-x="600" data-y="5700" data-z="-500">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+  var isEven = function(x) {
+    return x % 2 === 0;
+  };
+
+  var evensOnly = R.filter(isEven);
+
+  > evensOnly([1, 2, 3, 4, 5]);
+  [2, 4]</code>
+        </pre>
+      </section>
+      <section id="order-example4" class="step" data-x="1200" data-y="5000" data-z="-500">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+  var duplicate = function(x) {
+    return [x, x];
+  };
+
+  var duplicateEach = R.chain(duplicate);
+
+  > duplicateEach([1, 2, 3]);
+  [1, 1, 2, 2, 3, 3]</code>
+        </pre>
+      </section>
+      <section id="breather" class="step" data-x="0" data-y="6500">
+        <header>
+          <h1>Thus Ends Section One</h1>
+        </header>
+        <p>Let's take a quick break now</p>
+      </section>
+      <section id="composition-section" class="step" data-x="0" data-y="7000">
+        <header>
+          <h1>Function Composition</h2>
+          <h3><em>putting it all together</em></h3>
+        </header>
+      </section>
+      <section id="composition" class="step" data-x="0" data-y="7700">
+        <header>
+          <h1>Mathematical Functions</h1>
+        </header>
+        <p>
+          A function of one argument <code class="language-javascript inline-snippet">f(x)</code>
+          and another function of one argument <code class="language-javascript inline-snippet">g(x)</code>
+          can be <em>composed together</em> to make the function <code class="language-javascript inline-snippet">f(g(x))</code>
+        </p>
+      </section>
+      <section id="composition-example" class="step" data-x="0" data-y="8500">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+  > duplicateEach([1, 2, 3]);
+  [1, 1, 2, 2, 3, 3]
+
+  > evensOnly([1, 2, 3, 4, 5]);
+  [2, 4]
+
+  var duplicateEvens = R.compose(
+    duplicateEach,
+    evensOnly
+  );
+
+  > duplicateEvens([1, 2, 3, 4, 5]);
+  [2, 2, 4, 4]</code>
+        </pre>
+      </section>
+      <section id="exercises-main" class="step" data-x="0" data-y="9300">
+        <header>
+          <h1>Exercises!</h1>
+          <h4><em>not the sweaty kind</em><h4>
+        </header>
+        <p>Let's tackle some exercises and apply these concepts</p>
+        <p>Suppose we're working with a JSON API that provides a giant catalog of users.</p>
+        <p>
+          Each user has an <code class="language-javascript inline-snippet">id</code>,
+          a <code class="language-javascript inline-snippet">name</code>, and
+          an <code class="language-javascript inline-snippet">age</code>
+        </p>
+      </section>
+      <section id="exercises-catalog" class="step" data-x="0" data-y="10000">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+  {
+    users: [
+      {id: 3, name: "Thad", age: 36},
+      {id: 5, name: "Lucian", age: 23},
+      {id: 2, name: "Justine", age: 29},
+      {id: 4, name: "Katie", age: 26},
+      {id: 0, name: "Jerold", age: 52},
+      {id: 1, name: "Nona", age: 33}
+    ]
+  }</code>
+        </pre>
+        <p>
+          You can find this catalog in the "exercises" folder of the
+          class GitHub repository.
+        </p>
+      </section>
+      <section id="exercise1" class="step" data-x="-600" data-y="10800">
+        <header>
+          <h1>Sorting by ID</h1>
+          <h3><code class="language-javascript inline-snippet">npm run-script ex1</code><h3>
+        </header>
+        <p>It would be useful to see a list of users sorted by ID</p>
+        <p>
+          Ramda provides a <code class="language-javascript inline-snippet">sortBy</code>
+          function to make this easier.
+        </p>
+        <p>Note: it's a higher order function!</p>
+      </section>
+      <section id="exercise1-answer" class="step" data-x="600" data-y="10800">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+  var sortCatalogUsersById = R.compose(
+    R.sortBy(R.prop("id")),
+    R.prop("users")
+  );</code>
+        </pre>
+      </section>
+      <section id="exercise2" class="step" data-x="600" data-y="11600">
+        <header>
+          <h1>Users With an Even Age</h1>
+          <h3><code class="language-javascript inline-snippet">npm run-script ex2</code><h3>
+        </header>
+        <p>Now for some filtering</p>
+        <p>Let's say we want only the users in the catalog with an even age</p>
+        <p>
+          Tip - if you've got <code class="language-javascript inline-snippet">isEven</code>,
+          check out Ramda's <code class="language-javascript inline-snippet">propSatisfies</code>.
+        </p>
+      </section>
+      <section id="exercise2-answer" class="step" data-x="-600" data-y="11600">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+  var isEven = function(x) {
+    return x % 2 === 0
+  };
+
+  var hasEvenAge = R.propSatisfies(
+    isEven,
+    "age"
+  );
+
+  var getUsersWithEvenAge = R.compose(
+    R.filter(hasEvenAge),
+    R.prop("users")
+  );</code>
+        </pre>
+      </section>
+      <section id="exercise3" class="step" data-x="-600" data-y="12400">
+        <header>
+          <h1>Names of the Three Youngest Users</h1>
+          <h3><code class="language-javascript inline-snippet">npm run-script ex3</code><h3>
+        </header>
+        <p>Instead of sorting by ID, let's sort by age</p>
+        <p>Additionally, let's get the 3 youngest users instead of all of them</p>
+        <p>As a final twist - let's only get their names, not the whole user objects</p>
+      </section>
+      <section id="exercise3-answer" class="step" data-x="600" data-y="12400">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+  var getNamesOfThreeYoungestUsers =
+    R.compose(
+      R.map(R.prop("name")),
+      R.take(3),
+      R.sortBy(R.prop("age")),
+      R.prop("users")
+  );</code>
+        </pre>
+      </section>
+      <section id="exercise4" class="step" data-x="600" data-y="13200">
+        <header>
+          <h1>Users in their Thirties</h1>
+          <h3><code class="language-javascript inline-snippet">npm run-script ex4</code><h3>
+        </header>
+        <p>
+          Now a somewhat more complex query - let's get all
+          the users with age 30-39
+        </p>
+        <p>
+          Ramda provides <code class="language-javascript inline-snippet">R.lt</code>,
+          and <code class="language-javascript inline-snippet">R.gt</code>
+          for comparing, but their argument order makes things tricky
+        </p>
+        <p>
+          Maybe try
+          <code class="language-javascript inline-snippet">R.flip</code>
+          or <code class="language-javascript inline-snippet">R.__</code>
+        </p>
+      </section>
+      <section id="exercise4-answer" class="step" data-x="-600" data-y="13200">
+        <pre class="prettyprint">
+          <code class="language-javascript">
+  var isInThirties = R.both(
+    R.gte(R.__, 30),
+    R.lt(R.__, 40)
+  );
+
+  var userIsInThirties = R.propSatisfies(
+    isInThirties,
+    "age"
+  );
+
+  var getUsersInTheirThirties = R.compose(
+    R.filter(userIsInThirties),
+    R.prop("users")
+  );</code>
+        </pre>
+      </section>
+      <section id="final" class="step" data-x="0" data-y="14000">
+        <header>
+          <h1>Congratulations!</h1>
+          <h3><em>you survived!</em></h3>
+        </header>
+        <p>Now you know the main techniques of functional programming in Javascript</p>
+      </section>
+    </article>
+    <script>
+    if ("ontouchstart" in document.documentElement) {
+        document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+    }
+    </script>
+    <script src="js/impress.js"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    <script>impress().init();</script>
+  </body>
+</html>
