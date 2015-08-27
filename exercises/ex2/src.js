@@ -1,6 +1,7 @@
-var catalog = require('../catalog');
 var R = require('ramda');
 
-var getUsersWithEvenAge;
+var getUsersWithEvenAge = function(catalog) {
+  return;
+};
 
 module.exports = getUsersWithEvenAge

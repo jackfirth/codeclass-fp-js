@@ -1,6 +1,7 @@
-var catalog = require('../catalog');
 var R = require('ramda');
 
-var sortCatalogUsersById;
+var sortCatalogUsersById = function(catalog) {
+  return;
+};
 
 module.exports = sortCatalogUsersById
