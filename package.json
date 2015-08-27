@@ -4,10 +4,10 @@
   "description": "Exercises for Functional Programming in Javascript codeclass",
   "main": "index.js",
   "scripts": {
-    "ex1": "./node_modules/.bin/jasmine-node --autoTest exercises/ex1",
-    "ex2": "./node_modules/.bin/jasmine-node --autoTest exercises/ex2",
-    "ex3": "./node_modules/.bin/jasmine-node --autoTest exercises/ex3",
-    "ex4": "./node_modules/.bin/jasmine-node --autoTest exercises/ex4"
+    "ex1": "./node_modules/.bin/jasmine-node --autoTest --noStackTrace exercises/ex1",
+    "ex2": "./node_modules/.bin/jasmine-node --autoTest --noStackTrace exercises/ex2",
+    "ex3": "./node_modules/.bin/jasmine-node --autoTest --noStackTrace exercises/ex3",
+    "ex4": "./node_modules/.bin/jasmine-node --autoTest --noStackTrace exercises/ex4"
   },
   "repository": {
     "type": "git",
