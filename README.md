@@ -1,5 +1,5 @@
 # codeclass-fp-js
-Exercises for Functional Programming in Javascript
+Exercises for Functional Programming in Javascript (https://jackfirth.github.io/codeclass-fp-js/#/main)
 
 To use, clone the repo, open your terminal, `cd` into the project root, and run `npm install`.
 
