@@ -1,5 +1,5 @@
 # codeclass-fp-js
-Exercises for Functional Programming in Javascript (https://www.codeclass.io/#/workshops/1)
+Exercises for Functional Programming in Javascript
 
 To use, clone the repo, open your terminal, `cd` into the project root, and run `npm install`.
 
